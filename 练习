@@ -1,0 +1,97 @@
+	kucun() ;
+
+	}
+	static int cishu = 3;
+
+
+	public static void kucun() {
+		String[] name= {"苹果","鸭梨","香蕉","西瓜","桃子"};
+		double daxiao[]= {  5.4 , 4.7 ,2.3 ,5.5 , 8.7 ,5.2};
+		double kucun[]= {  16.3, 17.1 , 11.6 , 12.8 , 17.1};
+		int duoshao[]= {100,120,80,90,110};
+
+		while (true) {
+			switch (ceshi()) {
+			case 1:
+				look(name, daxiao, kucun, duoshao);
+				break;
+			case 2:
+				if (cishu == 0) {
+					System.out.println("对不起 您输入的错误用户名或者密码次数过多 请联系系统管理员！");
+					break;
+				}
+				updata(name, duoshao);
+				break;
+			case 3:
+				System.out.println("谢谢您的使用 再见!");
+				return;
+			default:
+				System.out.println("您的输入有误 请重新输入！");
+			}
+		}
+	}
+	public static int ceshi() {
+		System.out.println("-------------库存管理------------");
+		System.out.println("1.查看库存清单");
+		System.out.println("2.修改商品库存数量");
+		System.out.println("3.退出");
+		return new Scanner(System.in).nextInt();
+
+
+	}
+
+
+
+
+	public static void look(String name[], double daxiao[], double kucun[],
+			int duoshao[]) {
+		int sum = 0, money = 0;
+		System.out.println("-----------------商品清单-----------------");
+		System.out.println("品名     尺寸/寸   价格/元              库存/台");
+		for (int a = 0; a < duoshao.length; a++) {
+			System.out.println(name[a] +  "        "  + daxiao[a] + "   " + kucun[a]
+					+ "\t " + duoshao[a] + " ");
+			sum += duoshao[a];
+			money += duoshao[a] * kucun[a];
+		}
+		System.out.println("库存总量为:" + sum + "台");
+		System.out.println("库存总价为:" + money + "元");  
+
+
+
+
+
+
+	}
+	public static void updata(String name[], int duoshao[]) {
+		System.out.println("请输入管理员账号及密码:");
+		String username = new Scanner(System.in).next();
+		String password = new Scanner(System.in).next();
+		if (password(username, password)) {
+			for (int a = 0; a < duoshao.length; a++) {
+				System.out.println("商品" + name[a] + "的库存修改为:");
+				duoshao[a] = new Scanner(System.in).nextInt();
+				System.out.println("修改成功！");
+			}
+		}
+		else {
+			cishu--;
+			if (cishu > 0) {
+				System.out.println("用户名或者密码输入错误请重新输入！您还有" + cishu + "次机会！");
+			} else {
+				System.out.println("对不起 您输入的错误用户名或者密码次数过多 请联系系统管理员！");
+			}
+			return;
+		}
+	}
+	public static boolean password(String username, String password) {
+		boolean flag = false;
+		if (username.equals("hahahaha") && password.equals("123456789")) {
+			flag = true;
+		} else {
+			flag = false;
+		}
+		return flag;
+	}
+
+}
